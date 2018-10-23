@@ -1,0 +1,30 @@
+﻿@model Mobile_Shared_Web.Models.ClientViewModel
+
+@{
+    ViewBag.Title = "Client Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+        <h4>@Html.DisplayTextFor(m => m.ClientName)</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <label for="txtClientName">Client Name: </label>
+                @Html.TextBoxFor(m => m.ClientName, htmlAttributes: new { @id = "txtClientName" } )
+            </div>
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Save" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>

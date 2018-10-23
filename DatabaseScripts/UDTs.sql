@@ -1,0 +1,45 @@
+﻿DROP TYPE IF EXISTS [dbo].[AwardItemParam];
+DROP TYPE IF EXISTS [dbo].[ClientAccountParam];
+DROP TYPE IF EXISTS [dbo].[UserAccountParam];
+DROP TYPE IF EXISTS [dbo].[UserProfileParam];
+
+CREATE TYPE [dbo].[AwardItemParam] AS TABLE
+(
+	Id UNIQUEIDENTIFIER NULL,
+	UserProfileId UNIQUEIDENTIFIER NULL,
+	AwardStatusId INT NULL,
+	AwardName NVARCHAR(255) NULL,
+	EarnedValue DECIMAL(10,2) NULL,
+	CurrentValue DECIMAL(10,2) NULL
+)
+
+GO
+
+CREATE TYPE [dbo].[ClientAccountParam] AS TABLE
+(
+	Id UNIQUEIDENTIFIER NULL,
+	ClientName NVARCHAR(255) NULL
+)
+
+GO
+
+CREATE TYPE [dbo].[UserAccountParam] AS TABLE
+(
+	Id UNIQUEIDENTIFIER NULL,
+	FirstName NVARCHAR(50) NULL,
+	LastName NVARCHAR(50) NULL,
+	Username NVARCHAR(255) NULL,
+	Password NVARCHAR(255) NULL
+)
+
+GO
+
+CREATE TYPE [dbo].[UserProfileParam] AS TABLE
+(
+	Id UNIQUEIDENTIFIER NULL,
+	ClientAccountId UNIQUEIDENTIFIER NULL,
+	UserAccountId UNIQUEIDENTIFIER NULL,
+	EmailAddress NVARCHAR(255) NULL
+)
+
+GO
