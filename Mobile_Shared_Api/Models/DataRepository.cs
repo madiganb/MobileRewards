@@ -78,6 +78,16 @@ namespace Mobile_Shared_Api.Models
             return UserAccounts.ContainsKey(id) ? UserAccounts[id] : null;
         }
 
+        public UserAccount GetUserAccountByUsername(string username, string password)
+        {
+            if (!UserAccounts.Values.Any(ua => ua.Authenticate(username, password)))
+            {
+                return null;
+            }
+
+            return UserAccounts.Values.Single(ua => ua.Username.Equals(username, StringComparison.OrdinalIgnoreCase));
+        }
+
         public UserAccount AddUserAccount(string firstName, string lastName, string username, string password = null)
         {
             var id = Guid.NewGuid();

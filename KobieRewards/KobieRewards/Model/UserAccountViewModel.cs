@@ -8,7 +8,6 @@ namespace KobieRewards.Model
     public class UserAccountViewModel : BaseViewModel
     {
         private List<UserProfileViewModel> _profiles;
-        private string _password;
 
         [JsonProperty("userId")]
         public Guid Id { get; set; }

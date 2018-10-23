@@ -1,4 +1,5 @@
 ﻿using Mobile_Shared_Api.Models;
+using Newtonsoft.Json;
 using System;
 using System.Linq;
 using System.Web.Http;
@@ -8,6 +9,28 @@ namespace Mobile_Shared_Api.Controllers
     [RoutePrefix("api/users")]
     public class UserAccountController : ApiController
     {
+        [HttpPost]
+        [Route("v1/authenticate")]
+        public IHttpActionResult AuthenticateUser([FromBody] string auth)
+        {
+            try
+            {
+                var authItem = JsonConvert.DeserializeObject<AuthInputItem>(auth);
+                var user = DataRepository.Instance.GetUserAccountByUsername(authItem.Username, authItem.Password);
+
+                if (user == null)
+                {
+                    return Unauthorized();
+                }
+
+                return Ok(user);
+            }
+            catch
+            {
+                return InternalServerError();
+            }
+        }
+
         [HttpGet]
         [Route("v1/{id:Guid}")]
         public IHttpActionResult GetUserAccountById(Guid id)

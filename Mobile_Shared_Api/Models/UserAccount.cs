@@ -32,6 +32,16 @@ namespace Mobile_Shared_Api.Models
             set { _profiles = value; }
         }
 
+        public bool Authenticate(string username, string password)
+        {
+            if (Username.Equals(username, StringComparison.OrdinalIgnoreCase) && password == _password)
+            {
+                return true;
+            }
+
+            return false;
+        }
+
         public UserAccount CreateAccount(Guid id, string firstName, string lastName, string username, string password)
         {
             return new UserAccount
@@ -192,6 +202,7 @@ namespace Mobile_Shared_Api.Models
                     new UserProfile
                     {
                         Id = (Guid)reader["UserProfileId"],
+                        UserAccountId = (Guid)reader["UserAccountId"],
                         EmailAddress = reader["EmailAddress"].ToString(),
                         Client = new ClientAccount
                         {
@@ -203,6 +214,7 @@ namespace Mobile_Shared_Api.Models
                             new AwardItem
                             {
                                 Id = (Guid)reader["AwardItemId"],
+                                UserProfileId = (Guid)reader["UserProfileId"],
                                 Status = (AwardStatus)reader["AwardStatusId"],
                                 AwardName = reader["AwardName"].ToString(),
                                 EarnedValue = (decimal)reader["EarnedValue"],
