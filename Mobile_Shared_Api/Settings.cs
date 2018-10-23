@@ -34,7 +34,7 @@ namespace Mobile_Shared_Api
             {
                 if (!int.TryParse(ConfigurationManager.AppSettings["PersistanceIntervalMS"], out int interval))
                 {
-                    return 30000;
+                    return 60000;
                 }
 
                 return interval;
